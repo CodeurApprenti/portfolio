@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Modifier le Projet #'~ pin.id %}
+
+{% block body %}
+  <h1>Modification du Projet #{{ pin. id}} </h1>
+
+
+  {{ form_start(monFormulaire)}}
+    {{ form_widget(monFormulaire) }}
+
+    <input type="submit" value="Sauvegarder les modifications">
+    {{ form_end(monFormulaire) }}
+
+
+
+{% endblock %}
