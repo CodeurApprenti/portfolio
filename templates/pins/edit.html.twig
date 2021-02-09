@@ -5,13 +5,6 @@
 {% block body %}
   <h1>Modification du Projet #{{ pin. id}} </h1>
 
-
-  {{ form_start(monFormulaire)}}
-    {{ form_widget(monFormulaire) }}
-
-    <input type="submit" value="Sauvegarder les modifications">
-    {{ form_end(monFormulaire) }}
-
-
+    {{ include('pins/_form.html.twig', {'submitButtonText': 'Modification du Projet'}) }}
 
 {% endblock %}
