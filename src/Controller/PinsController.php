@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PinsController extends AbstractController
 {
 
-   
+
     /**
      * @Route("/", name="app_home", methods={"GET"})
      */
@@ -39,23 +39,23 @@ class PinsController extends AbstractController
         $pin = new Pin;
 
         $form = $this->createForm(PinType::class, $pin);
-           
+
         $form->handleRequest($request);
 
         // Verification que tout est valide
         if ($form->isSubmitted() && $form->isValid()) {
-          $em->persist($pin);
-          $em->flush();
+            $em->persist($pin);
+            $em->flush();
 
-          //Redirection vers la page Home
-          return $this->redirectToRoute('app_home');
+            $this->addFlash('success', 'Le projet a bien été créé !');
+
+            //Redirection vers la page Home
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('pins/create.html.twig', [
             'monFormulaire' => $form->createView()
         ]);
-
-
     }
 
     /**
@@ -70,7 +70,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods={"GET", "PUT"})
      */
-    public function edit(Request $request ,Pin $pin,  EntityManagerInterface $em):Response
+    public function edit(Request $request, Pin $pin,  EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PinType::class, $pin, [
             'method' => 'PUT'
@@ -80,18 +80,18 @@ class PinsController extends AbstractController
 
         // Verification que tout est valide
         if ($form->isSubmitted() && $form->isValid()) {
-          $em->flush();
+            $em->flush();
 
-          //Redirection vers la page Home
-          return $this->redirectToRoute('app_home');
+            $this->addFlash('success', 'Le projet a bien été modifié !');
+
+            //Redirection vers la page Home
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('pins/edit.html.twig', [
             'pin' => $pin,
             'monFormulaire' => $form->createView()
         ]);
-
-
     }
 
     /**
@@ -99,18 +99,17 @@ class PinsController extends AbstractController
      */
     public function delete(Request $request, Pin $pin, EntityManagerInterface $em): Response
     {
-      
 
-        if ($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->request->get('csrf_token')))
-        {
+
+        if ($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->request->get('csrf_token'))) {
             $em->remove($pin);
             $em->flush();
+
+            $this->addFlash('info', 'Le projet a bien été supprimé !');
         }
-     
 
-       //Redirection vers la page Home
-       return $this->redirectToRoute('app_home');
-    
 
+        //Redirection vers la page Home
+        return $this->redirectToRoute('app_home');
     }
 }

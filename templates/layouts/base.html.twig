@@ -6,10 +6,30 @@
         {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}{% endblock %}
+        <style>
+         .alert{
+             padding: 10px;
+             color:white;
+             text-align: center;
+         }
+
+         .alert-success{
+             background-color: green;
+         }
+
+         .alert-error{
+             background-color: red;
+         }
+
+             .alert-info{
+             background-color: #0074D9;
+         }
+        </style>
     </head>
 
 
     <body>
+       {{ include('layouts/partials/_flash_messages.html.twig')}}
         <nav>
             <ul>
                 <li><a href="{{ path('app_home') }}">Home</a></li>
@@ -17,5 +37,6 @@
             </ul>
         </nav>
         {% block body %}{% endblock %}
+        
     </body>
 </html>
