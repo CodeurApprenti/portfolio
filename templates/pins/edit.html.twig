@@ -3,8 +3,12 @@
 {% block title 'Modifier le Projet #'~ pin.id %}
 
 {% block body %}
-  <h1>Modification du Projet #{{ pin. id}} </h1>
+  
 
+  <div class="row">
+    <div class="col col-md-6 mx-auto">
+    <h1>Modification du Projet #{{ pin. id}} </h1>
     {{ include('pins/_form.html.twig', {'submitButtonText': 'Modification du Projet'}) }}
-
+    </div>
+  </div>
 {% endblock %}

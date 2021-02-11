@@ -2,7 +2,9 @@
   {{ form_start(monFormulaire)}}
     {{ form_widget(monFormulaire) }}
 
-    <input type="submit" value="{{ submitButtonText }}">
+    <input type="submit" class="btn btn-primary col-12" value="{{ submitButtonText }}"  formnovalidate>
+
+
     {{ form_end(monFormulaire) }}
 
 
