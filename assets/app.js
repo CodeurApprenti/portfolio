@@ -11,5 +11,11 @@ import "./scss/app.scss";
 // start the Stimulus application
 
 import $ from 'jquery';
-import Popper from 'popper.js';
 import 'bootstrap';
+
+
+// Récupération du nom de notre image dans la barre de recherche
+$('.custom-file-input').on('change', function(e) {
+    var inputFile = e.currentTarget;
+    $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name);
+});
