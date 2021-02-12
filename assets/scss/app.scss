@@ -36,6 +36,33 @@ html, body{
 }
 
 
+.pin img {
+    transition: transform 0.3s ease-out;
+    
+    &:hover {
+        transform: scale(1.075);
+    }
+}
+  
+
+
 .badge-danger{
     background-color: #d32f2f
+}
+
+.vich-image {
+    .form-check{
+        @extend .mt-3
+    }
+
+    img {
+        
+        @extend .mb-4;
+        @extend .rounded;
+        @extend .shadow;
+        @extend .img-thumbnail;
+    }
+    
+
+
 }
