@@ -24,7 +24,7 @@ class User implements UserInterface
      */
     private $id;
 
-        /**
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;
@@ -67,7 +67,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -90,6 +90,11 @@ class User implements UserInterface
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     public function getEmail(): ?string
@@ -197,5 +202,4 @@ class User implements UserInterface
 
         return $this;
     }
-
 }

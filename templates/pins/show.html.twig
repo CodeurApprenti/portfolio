@@ -19,7 +19,7 @@
 				</h1>
 				<p class="pl-3 pb-3 text-muted ">
 					<small>
-						Crée par [FULL NAME]
+						Crée par {{ pin.user.fullName }}
 						<time datetime="{{ pin.createAt|date('Y-m-d H:i:s')}}">
 							{{ pin.createAt|ago }}</time>
 					</small>
