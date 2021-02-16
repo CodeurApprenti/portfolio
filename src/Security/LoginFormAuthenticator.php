@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\User;
+use App\src\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -20,6 +20,11 @@ use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+
+
+
+
+
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -57,6 +62,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('csrf_token'),
         ];
+
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
@@ -99,21 +105,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials['password'];
     }
 
+    protected function getLoginUrl()
+    {
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+    
     // Succes de L'authentification
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
-        $request->getSession()->getFlashBag()->add('success', 'Connexion avec succès');
-
+        $request->getSession()->getFlashBag()->add('success', 'Bienvenue '. $token->getUser()->getFullName());
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-
-   
     }
 
-    // Redirection si l'utilisateur n'est pas connecté 
+
     /**
      * Override to control what happens when the user hits a secure page
      * but isn't logged in yet.
@@ -122,15 +131,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
+        $request->getSession()->getFlashBag()->add('error', 'Vous devez d\'abord vous connecter!');
+        
         $url = $this->getLoginUrl();
 
-        return new RedirectResponse('https://www.google.com');
-    }
-
-    
-
-    protected function getLoginUrl()
-    {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return new RedirectResponse($url);
     }
 }

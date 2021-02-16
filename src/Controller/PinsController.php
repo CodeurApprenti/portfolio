@@ -45,8 +45,7 @@ class PinsController extends AbstractController
 
         // Verification que tout est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            $codeurApprenti = $userRepo->findOneBy(['email' => 'dxluffy@gmail.com']);
-            $pin->setUser($codeurApprenti);
+            $pin->setUser($this->getUser());
             $em->persist($pin);
             $em->flush();
 
