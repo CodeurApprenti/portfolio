@@ -57,6 +57,7 @@ class User implements UserInterface
      */
     private $password;
 
+
     /**
      * @ORM\OneToMany(targetEntity=Pin::class, mappedBy="user", orphanRemoval=true)
      */
@@ -107,6 +108,11 @@ class User implements UserInterface
     public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public function gravatar(?int $size = 100)
+    {
+        return sprintf('https://www.gravatar.com/avatar/%s?s=%d', md5(strtolower(trim($this->getEmail()))), $size);
     }
 
 
