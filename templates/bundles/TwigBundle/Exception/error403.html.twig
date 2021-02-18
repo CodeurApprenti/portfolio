@@ -1,0 +1,16 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+   <div class="row">
+        <col-md-6 class="text-center mx-auto">
+            <h1>Accès non autorisé</h1>
+
+           
+
+            <p class="col-md-6 mx-auto">
+                Vous n'avez pas les autorisations nécessaires pour accéder à cette page, veuillez retourner sur la page d'accueil en cliquant ce lien suivant <a href="{{ path('app_home') }}">Accueil</a>.
+            </p>
+        </col-md-6>
+    </div>
+{% endblock %}
