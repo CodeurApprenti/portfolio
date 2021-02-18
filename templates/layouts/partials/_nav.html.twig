@@ -1,45 +1,45 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
+	<div class="container">
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
-    <div class="container">
-    
-     <a class="navbar-brand" href="{{ path('app_home') }}">Kevin Code</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+		<a class="navbar-brand" href="{{ path('app_home') }}">Kevin Code</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-      <div class="collapse navbar-collapse" id="navbarsExample03">
-        <ul class="navbar-nav ml-auto">
-          {% if app.user %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_pins_create') }}">Nouveau projet</a>
-          </li>
+		<div class="collapse navbar-collapse" id="navbarsExample03">
+			<ul class="navbar-nav ml-auto">
+      {# Accès à la création des Projets uniquement à ROLE_ADMIN #}
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_pins_create') }}">Nouveau projet</a>
+					</li>
+				{% endif %}
+				{% if app.user %}
 
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_account') }}">Mon compte</a>
-          </li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_account') }}">Mon compte</a>
+					</li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">Logout</a>
-          </li>
-          {# Formulaire de Deconnexion #}
-          <form id="js-logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-          </form>
-          {% else %}
-          <li class="nav-item">
-             <a class="nav-link" href="{{ path('app_register') }}">Inscription</a> 
-          </li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">Logout</a>
+					</li>
+					{# Formulaire de Deconnexion #}
+					<form id="js-logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+					</form>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+					</li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-          </li>
-          {% endif %}
-        </ul>
-       
-      </div>
-    
-    </div>
-     
-    </nav>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+				{% endif %}
+			</ul>
 
-   
+		</div>
+
+	</div>
+
+</nav>

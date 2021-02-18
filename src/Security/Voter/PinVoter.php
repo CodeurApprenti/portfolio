@@ -23,13 +23,10 @@ class PinVoter extends Voter
         }
 
        switch ($attribute) {
-            case 'PIN_CREATE':
-                return $user->isVerified();
-            case 'PIN_MANAGE':
-                return $user->isVerified() && $user == $subject->getUser();
-            // case 'PIN_ADMIN':
-            //     return $user->isVerified() && $user == $subject->getUser()->getEmail('dxluffy@gmail.com');
-
+            // case 'PIN_CREATE':
+            //     return $user->isVerified();
+            // case 'PIN_MANAGE':
+            //     return $user->isVerified() && $user == $subject->getUser();
         }
 
         return false;

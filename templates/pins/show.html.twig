@@ -32,7 +32,7 @@
 					 {{ pin.lien_projet }} 
 
 				</p> #}
-				 {% if is_granted('PIN_MANAGE', pin) %} 
+				{% if is_granted('ROLE_ADMIN', pin) %}
 				<div class="pt-3">
 					<a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
 
